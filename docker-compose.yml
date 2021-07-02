@@ -1,0 +1,42 @@
+version: '3.3'
+services:
+
+  #  app:
+  #    build: ./
+  #    ports:
+  #      - 2009:3000
+  #    volumes:
+  #    - .env:/usr/src/app/dist/.env
+  #    environment:
+  #      REDIS_HOST: redis
+  #      DATABASE_HOST: postgres
+  #      DATABASE_NAME: lumen
+  #      DATABASE_CONNECT: postgres
+  #      DATABASE_USER: test
+  #      DATABASE_PASSWORD: test
+  #      JWT_SECRET: hodfords
+  #      JWT_EXPIRE: 7d
+  #    networks:
+  #      - webnet
+  adminer:
+    image: adminer:latest
+    ports:
+      - 7081:8080
+    networks:
+      - webnet
+  postgres:
+    image: postgres:11
+    volumes:
+      - data-volume:/data/db
+    ports:
+      - 7432:5432
+    environment:
+      POSTGRES_PASSWORD: test
+      POSTGRES_USER: test
+      POSTGRES_DB: test
+    networks:
+      - webnet
+networks:
+  webnet:
+volumes:
+  data-volume:
