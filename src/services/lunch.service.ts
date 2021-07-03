@@ -4,6 +4,7 @@ import { UserRepository } from '../repositories/user.repository';
 import { loadRelations } from '@hodfords/typeorm-helper';
 import * as moment from 'moment';
 import { UserEntity } from '../entities/user.entity';
+import { randomInt } from 'crypto';
 
 @Injectable()
 export class LunchService {
@@ -21,8 +22,15 @@ export class LunchService {
         // Filter ông nào mới đặt trong vòng 7 ngày gần nhất
         users = this.filterActiveUser(users);
 
-        users = this.createRandomScore(users);
-        console.log(users);
+        // Tạo random score
+        let randomScore = this.createRandomScore(users);
+
+        users = randomScore.users;
+
+        let randomPoint = randomInt(1, randomScore.score);
+
+        // Chọn user
+        return users.find((u: any) => u.randomScores.includes(randomPoint));
     }
 
     createRandomScore(users: UserEntity[]) {
@@ -51,7 +59,7 @@ export class LunchService {
             (user as any).randomScores = randomScores;
         }
 
-        return users;
+        return { users, score: randomScore };
     }
 
     filterNewUser(users: UserEntity[]) {
