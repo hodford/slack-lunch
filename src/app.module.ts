@@ -10,6 +10,8 @@ import { UserEntity } from './entities/user.entity';
 import { UserRepository } from './repositories/user.repository';
 import { HistoryEntity } from './entities/history.entity';
 import { HistoryRepository } from './repositories/history.repository';
+import { SlackController } from './controllers/slack.controller';
+import { LunchService } from './services/lunch.service';
 
 @Module({
     imports: [
@@ -23,8 +25,8 @@ import { HistoryRepository } from './repositories/history.repository';
             ]
         )
     ],
-    controllers: [AppController],
-    providers: [AppService, SlackService, HistoryService, UserService]
+    controllers: [AppController, SlackController],
+    providers: [AppService, SlackService, HistoryService, UserService, LunchService]
 })
 export class AppModule {
 }

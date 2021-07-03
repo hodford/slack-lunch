@@ -1,17 +1,21 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { BaseEntity } from '@hodfords/typeorm-helper';
+import { UserEntity } from './user.entity';
 
 @Entity('History')
 export class HistoryEntity extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({ nullable: true })
-    firstName: string;
+    @Column()
+    status: number;
 
-    @Column({ nullable: true })
-    lastName: string;
+    @ManyToOne(() => UserEntity, (user) => user.histories)
+    user: UserEntity;
 
-    @Column({ nullable: true, length: 15 })
-    phoneNumber: string;
+    @Column()
+    userId: number;
+
+    @CreateDateColumn()
+    createdAt: Date;
 }

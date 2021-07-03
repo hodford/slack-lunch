@@ -18,5 +18,5 @@ export const env = {
         NAME: process.env.DATABASE_NAME
     },
     CHANNEL_NAME: 'test-lunch',
-    SLACK_TOKEN: ''
+    SLACK_TOKEN: 'xoxb-1965530862418-2234605120034-CboegvD7tYWAE4rspv0bGoA5'
 };
