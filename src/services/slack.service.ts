@@ -3,6 +3,7 @@ import { WebClient } from '@slack/web-api';
 import { Channel } from '@slack/web-api/dist/response/ConversationsListResponse';
 import { env } from '../config/env.config';
 import { UserService } from './user.service';
+import { Block, KnownBlock } from '@slack/types';
 
 @Injectable()
 export class SlackService {
@@ -15,6 +16,10 @@ export class SlackService {
 
     async init() {
         this.channel = await this.getChannel();
+        await this.updateMembers();
+    }
+
+    async updateMembers() {
         await this.userService.addUsers(await this.getMembersInChannel());
     }
 
@@ -40,36 +45,19 @@ export class SlackService {
         ).members;
     }
 
-    async sendAMessage() {
-        await this.client.chat.postMessage({
+    async sendAMessage(blocks: (KnownBlock | Block)[]) {
+        return await this.client.chat.postMessage({
             channel: this.channel.id,
-            link_names: true,
-            blocks: [
-                {
-                    type: 'actions',
-                    elements: [
-                        {
-                            type: 'button',
-                            text: {
-                                type: 'plain_text',
-                                text: 'Ok để tao',
-                                emoji: true
-                            },
-                            value: 'click_me_123'
-                        },
-                        {
-                            type: 'button',
-                            text: {
-                                type: 'plain_text',
-                                text: 'Bận',
-                                emoji: true
-                            },
-                            value: 'click_me_123'
-                        }
-                    ]
-                }
-            ],
-            text: `<@1233> hello`
+            blocks: blocks,
+            text: 'Fuck'
+        });
+    }
+
+    async updateMessage(messageId, blocks) {
+        return await this.client.chat.update({
+            channel: this.channel.id,
+            ts: messageId,
+            blocks: blocks
         });
     }
 }

@@ -12,21 +12,11 @@ import { HistoryEntity } from './entities/history.entity';
 import { HistoryRepository } from './repositories/history.repository';
 import { SlackController } from './controllers/slack.controller';
 import { LunchService } from './services/lunch.service';
+import { TaskService } from './services/task.service';
 
 @Module({
-    imports: [
-        databaseConfig,
-        TypeOrmModule.forFeature(
-            [
-                UserEntity,
-                UserRepository,
-                HistoryEntity,
-                HistoryRepository
-            ]
-        )
-    ],
+    imports: [databaseConfig, TypeOrmModule.forFeature([UserEntity, UserRepository, HistoryEntity, HistoryRepository])],
     controllers: [AppController, SlackController],
-    providers: [AppService, SlackService, HistoryService, UserService, LunchService]
+    providers: [AppService, SlackService, HistoryService, UserService, LunchService, TaskService]
 })
-export class AppModule {
-}
+export class AppModule {}

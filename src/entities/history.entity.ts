@@ -8,13 +8,16 @@ export class HistoryEntity extends BaseEntity {
     id: number;
 
     @Column()
-    status: number;
+    status: string;
 
     @ManyToOne(() => UserEntity, (user) => user.histories)
     user: UserEntity;
 
     @Column()
     userId: number;
+
+    @Column()
+    messageId: string;
 
     @CreateDateColumn()
     createdAt: Date;

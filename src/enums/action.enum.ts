@@ -1,4 +1,5 @@
 export enum ActionEnum {
     OK = 'OK',
-    REJECT = 'REJECT'
+    REJECT = 'REJECT',
+    DRAFT = 'DRAFT'
 }

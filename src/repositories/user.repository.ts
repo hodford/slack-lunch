@@ -7,5 +7,4 @@ export class UserRepository extends BaseRepository<UserEntity> {
     findUserBySlackId(slackId) {
         return this.findOne({ slackId });
     }
-
 }
