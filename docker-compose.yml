@@ -1,23 +1,21 @@
 version: '3.3'
 services:
-
-  #  app:
-  #    build: ./
-  #    ports:
-  #      - 2009:3000
-  #    volumes:
-  #    - .env:/usr/src/app/dist/.env
-  #    environment:
-  #      REDIS_HOST: redis
-  #      DATABASE_HOST: postgres
-  #      DATABASE_NAME: lumen
-  #      DATABASE_CONNECT: postgres
-  #      DATABASE_USER: test
-  #      DATABASE_PASSWORD: test
-  #      JWT_SECRET: hodfords
-  #      JWT_EXPIRE: 7d
-  #    networks:
-  #      - webnet
+  app:
+    build: ./
+    ports:
+      - 80:${APP_PORT}
+    environment:
+      REDIS_HOST: redis
+      DATABASE_HOST: postgres
+      DATABASE_NAME: ${DATABASE_NAME}
+      DATABASE_CONNECT: postgres
+      DATABASE_USER: ${DATABASE_USER}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      APP_PORT: ${APP_PORT}
+      SLACK_CHANNEL: ${SLACK_CHANNEL}
+      SLACK_TOKEN: ${SLACK_TOKEN}
+    networks:
+      - webnet
   adminer:
     image: adminer:latest
     ports:
@@ -31,9 +29,9 @@ services:
     ports:
       - 7432:5432
     environment:
-      POSTGRES_PASSWORD: test
-      POSTGRES_USER: test
-      POSTGRES_DB: test
+      POSTGRES_PASSWORD: ${DATABASE_NAME}
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_DB: ${DATABASE_PASSWORD}
     networks:
       - webnet
 networks:

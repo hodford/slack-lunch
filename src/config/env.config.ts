@@ -17,6 +17,6 @@ export const env = {
         PASSWORD: process.env.DATABASE_PASSWORD,
         NAME: process.env.DATABASE_NAME
     },
-    CHANNEL_NAME: 'test-lunch',
-    SLACK_TOKEN: 'xoxb-1965530862418-2234605120034-VAJPMDXde9IBZiNqEKQx0r9N'
+    CHANNEL_NAME: process.env.SLACK_CHANNEL,
+    SLACK_TOKEN: process.env.SLACK_TOKEN
 };

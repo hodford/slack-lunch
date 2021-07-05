@@ -17,7 +17,7 @@ export class LunchService {
         private slackService: SlackService,
         private historyService: HistoryService
     ) {
-        this.selectUserAndSendMessage();
+        // this.selectUserAndSendMessage();
     }
 
     async selectUserAndSendMessage() {

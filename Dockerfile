@@ -17,6 +17,6 @@ ADD package*.json ./
 COPY --from=0 /usr/src/app/node_modules/ ./node_modules/
 RUN npm install
 COPY --from=development /usr/src/app/dist ./dist
-EXPOSE 3000
+EXPOSE 7009
 # CMD [ "pm2-runtime", "start", "pm2.json" ]
 CMD ["node", "/usr/src/app/dist/main.js"]
