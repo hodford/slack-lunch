@@ -17,7 +17,7 @@ export class LunchService {
         private slackService: SlackService,
         private historyService: HistoryService
     ) {
-        // this.selectUserAndSendMessage();
+        this.selectUserAndSendMessage();
     }
 
     async selectUserAndSendMessage() {
@@ -193,7 +193,7 @@ export class LunchService {
 
     createRandomScore(users: UserEntity[]) {
         users.sort((a, b) => {
-            if (!a.lastHistory) {
+            if (!a.lastHistory || !b.lastHistory) {
                 return -1;
             }
 
